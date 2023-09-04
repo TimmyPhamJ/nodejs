@@ -20,10 +20,23 @@ let getCRUD = (req, res) => {
     return res.render('crud.ejs');
 };
 
+//Taoj bản ghi cho DB
 let postCRUD = async (req, res) => {
     let message = await CRUDService.createNewUser(req.body);
     console.log(message);
     return res.send('post crud from server');
+};
+
+//Show bản ghi từ db ra màng hình
+let displayCRUD = async (req, res) => {
+    let data = await CRUDService.showAllUser();
+    console.log('_____________');
+    console.log(data);
+    console.log('_____________');
+
+    return res.render('displayCRUD.ejs', {
+        dataTable: data,
+    });
 };
 
 module.exports = {
@@ -31,4 +44,5 @@ module.exports = {
     getAboutPage: getAboutPage,
     getCRUD: getCRUD,
     postCRUD: postCRUD,
+    displayCRUD: displayCRUD,
 };
